@@ -1,0 +1,55 @@
+/*** classes ***/
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.grey-box {
+  background-color: #f0f0f0;
+  border: 2px solid #999;
+}
+
+.row {
+  margin-bottom: 5px;
+}
+
+[class*="col-"] {
+  padding-top: 5px;
+  padding-bottom: 3px;
+  background-color: rgba(86, 61, 124, .15);
+  border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.col-sm-2 {
+  border-left: 0px;
+}
+
+.border-right {
+  border-right: 0px;
+  margin: auto;
+}
+
+.border-left {
+  border-left: 0px;
+}
+
+/* side nav*/
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+}
