@@ -19,5 +19,19 @@
 			"page_title": "Product Type",
 			"dir": "product_type"
 		}
+	],
+	"Shipping Company": [
+		{
+			"nav_title": "Shipping Company",
+			"page_title": "Shipping Company",
+			"dir": "shipping_company"
+		}
+	],
+	"Shipping Quotes": [
+		{
+			"nav_title": "Shipping Quotes",
+			"page_title": "Shipping Quotes",
+			"dir": "shipping_quotes"
+		}
 	]
 }

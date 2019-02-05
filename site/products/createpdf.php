@@ -1,94 +1,93 @@
 <?php
-//include("../../globals.php");
-require(CLASSES_PATH . '/fpdf/fpdf.php');
+require DOC_ROOT . '/vendor/autoload.php';
 
-class PDF extends FPDF
-{
-// Page header
-function Header()
-{
-    // Logo
-    //$this->Image('logo.png',10,6,30);
-    // Arial bold 15
-    $this->SetFont('Arial','B',15);
-    // Move to the right
-    $this->Cell(80);
-    // Title
-    $this->Cell(30,10,'Shipping Quote Request Form',0,0,'C');
-    // Line break
-    $this->Ln(20);
-}
+/*$dbs = new DB_SELECT("SELECT
+                        shq_shippingquote.shq_id AS quoteid,
+                        shq_shippingquote.shq_contact AS shipping_contact,
+                        pro_product.pro_productname AS product_name,
+                        shc_shippingcompany.shc_shcompanyname AS shipping_company
+                        FROM pro_product
+                        INNER JOIN shq_shippingquote
+                        ON pro_product.pro_id = shq_shippingquote.shq_productid    
+                        INNER JOIN shc_shippingcompany 
+                        ON shc_shippingcompany.shc_id = shq_shippingquote.shq_shippingcompanyid                  
+                      ");*/
 
-// Page footer
-function Footer()
-{
-    // Position at 1.5 cm from bottom
-    $this->SetY(-15);
-    // Arial italic 8
-    $this->SetFont('Arial','I',8);
-    // Page number
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-}
-}
+$dbs = new DB_SELECT("SELECT * 
+                      FROM shc_shippingcompany 
+                      WHERE shc_id=" . $_POST["shcompanyid"] . "");
+$shc_data = $dbs->get_form_data("shc_shippingcompany");
 
-// Instanciation of inherited class
-$pdf = new PDF();
-$pdf->AliasNbPages();
-$pdf->AddPage();
-$pdf->SetFont('Arial','',14);
+use Spipu\Html2Pdf\Html2Pdf;
 
-$json_file_string = file_get_contents("quote_fields.json");      
-$json_array = json_decode($json_file_string, true);
+$html2pdf = new Html2Pdf();
 
-foreach($json_array as $nav_item) {       
-    $nav_item[0]["page_title"];
-    $nav_item[0]["dir"];
-} 
+//used in the quote id
+$company_substr = substr(strtoupper($shc_data["shc_shcompanyname"]), 0, 3);
 
-$quote_array = //array(
-    array(
-        "Name" => "Steven Mather",
-        "Contact Number" => "0467 972 595",
-        "Email Address" => "steve@asmather.com",
-        "From Country" => "China",
-        "Port of Origin" => "China",
-        "Goods" => $_POST["producttype"],
-        "To Country" => "Australia",
-        "Destination Port" => "Port Botany",
-        "Value of Goods (total)" => "",
-        "Type of freight" => $_POST["freighttype"],
-        "Shipping Terms" => $_POST["shippingterms"],
-        "Dimensions" => "W" . $_POST["width"] . " * D" . $_POST["depth"] . " * H" . $_POST["height"],
-        "Total Weight" => $_POST["weighttotal"] . "KG"
-    )
-;
+$html = "<link rel=\"stylesheet\" type=\"text/css\" href=\"pdf.css\"/>";
+$html .= "<div class=\"companyHeader\">";
+$html .= "Steven Mather<br>";
+$html .= "Tel: 0467 972 595<br>";
+$html .= "Email: steve@asmather.com<br>";
+$html .= "ABN: 57 061 998 393<br>";
+$html .= "Quote ID: " . substr(strtoupper($shc_data["shc_shcompanyname"]), 0, 3) . $quote_id;
+$html .= "</div >";
 
-//var_dump($quote_array);
+$html .= "<div class=\"shippingCompanyHeader\">";
+$html .= $shc_data["shc_shcompanyname"] . "<br>";
+$html .= $shc_data["shc_shphone"] . "<br>";
+$html .= $shc_data["shc_shemail"] . "<br>";
+//$html .= "Tel: 0467 972 595<br>";
+$html .= "</div >";
 
-foreach($quote_array as $key => $value)
-    $pdf->Cell(0,10,$key . ":  " . $value,0,1);
-$pdf->Output();
+$html .= "<p class=\"header\">Shipping Quote Request</p>";
+$html .= "<table>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">From Country:</td>";
+$html .= "<td>China</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">Port of Origin:</td>";
+$html .= "<td>China</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">Goods:</td>";
+$html .= "<td>" . $_POST["producttype"] . "</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">To Country:</td>";
+$html .= "<td>Australia</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">Destination Port:</td>";
+$html .= "<td>Port Botany</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">Value of Goods (total):</td>";
+$html .= "<td>$" . $_POST["totalprice"] . " USD</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">Type of freight:</td>";
+$html .= "<td>" . $_POST["freighttype"] . "</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">Shipping Terms:</td>";
+$html .= "<td>" . $_POST["shippingterms"] . "</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">Dimensions:</td>";
+$html .= "<td>W" . $_POST["width"] . " * D" . $_POST["depth"] . " * H" . $_POST["height"] . "</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">Total Weight:</td>";
+$html .= "<td>" . $_POST["weighttotal"] . "KG</td>";
+$html .= "</tr>";
+$html .= "</table> ";
 
-// $pdf = new FPDF();
-// $pdf->AddPage();
-// $pdf->SetFont('Arial','B',14);
-// $pdf->Cell(180,10,'Shipping Quote Request Form',0,1,'C');
-// // $pdf->SetFont('Arial','',14);
-// // $pdf->Cell(40,40,'Name:');
-// // $pdf->Cell(40,40,'Steven Mather',0,1,'C');
-// // $pdf->Cell(40,1,'Contact Number:');
-// // $pdf->Cell(40,1,'0467972595',0,1,'C');
-// // $pdf->Cell(40,20,'Email Address:');
-// // $pdf->Cell(40,20,'steve@asmather.com',0,1,'C');
-// //$pdf->Cell(60,10,'Powered by FPDF.',0,1,'C');
-// //$pdf->Cell(60,10,'Powered by FPDF.',0,1,'C');
-// $pdf->SetFont('Arial','',14);
-// $pdf->Cell(40,40,'Hello World!');
-// $pdf->Cell(60,40,'Powered by FPDF.',0,1,'C');
-// $pdf->Cell(40,10,'Hello World!');
-// $pdf->Cell(60,10,'Powered by FPDF.',0,1,'C');
-// // $pdf->Cell(40,10,'Hello World!');
-// // $pdf->Cell(60,10,'Powered by FPDF.',0,1,'C');
-// $pdf->Output();
+$html2pdf->writeHTML($html);
+$html2pdf->output();
+//$html2pdf->output("shipquote_" . $company_substr . $_POST["shcompanyid"] . ".pdf", 'D');
+
 exit;
 ?>

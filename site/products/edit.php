@@ -4,12 +4,12 @@ include("../../globals.php");
 
 include(SITE_HEADER);
 
-isset($_REQUEST["id"]) ? $id = $_REQUEST["id"] : $id = 0 ;
+isset($_REQUEST["id"]) ? $id = $_REQUEST["id"] : $id = 0;
 
 $products = new DB_SELECT("select * from pro_product where pro_id = " . $id . "");
 $form_data = $products->get_form_data("pro_product");
 
-isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["companyid"] : $companyidid = 0 ;
+isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["companyid"] : $companyidid = 0;
 ?>
 <div class="container">
   <form id="product" name="productform" action="process.php" method="post" enctype="multipart/form-data">
@@ -28,26 +28,43 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
     </div>
     <div class="form-group">
       <label for="company">Company</label>
-      <?php       
-      $company = new DB_SELECT("select * from com_company");  
+      <?php 
+      $company = new DB_SELECT("select * from com_company");
       ?>      
       <select class="form-control" name="companyid" required>
         <option> -- select company -- </option>
         <?php
-        for($i = 0; $i < count($company->result()); $i++) {     
-          $field_value = $company->result()[$i];         
+        for ($i = 0; $i < count($company->result()); $i++) {
+          $field_value = $company->result()[$i];
           ?>
-          <option value="<?php echo $field_value["com_id"] ?>" <?php $form_data["pro_companyid"] == $field_value["com_id"] ? print "selected" : print "" ; ?>><?php echo $field_value["com_companyname"] ?></option>
+          <option value="<?php echo $field_value["com_id"] ?>" <?php $form_data["pro_companyid"] == $field_value["com_id"] ? print "selected" : print ""; ?>><?php echo $field_value["com_companyname"] ?></option>
         <?php 
-        }
-        ?>
+      }
+      ?>
+      </select>      
+    </div>
+    <div class="form-group">
+      <label for="company">Shipping Company</label>
+      <?php 
+      $company = new DB_SELECT("select * from shc_shippingcompany");
+      ?>      
+      <select class="form-control" name="shcompanyid">
+        <option> -- select company -- </option>
+        <?php
+        for ($i = 0; $i < count($company->result()); $i++) {
+          $field_value = $company->result()[$i];
+          ?>
+          <option value="<?php echo $field_value["shc_id"] ?>" <?php $form_data["pro_shcompanyid"] == $field_value["shc_id"] ? print "selected" : print ""; ?>><?php echo $field_value["shc_shcompanyname"] ?></option>
+        <?php 
+      }
+      ?>
       </select>      
     </div>
     <div class="form-group">
       <label for="shippingterms">Shipping Terms</label>
       <select class="form-control" name="shippingterms" required>
         <option> -- select -- </option>
-        <option value="FOB" <?php $form_data["pro_shippingterms"] == "FOB" ? print "selected" : print "" ; ?>>FOB</option>
+        <option value="FOB" <?php $form_data["pro_shippingterms"] == "FOB" ? print "selected" : print ""; ?>>FOB</option>
       </select>      
     </div>
     <div class="form-group">
@@ -94,10 +111,10 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
       <label for="freighttype">Freight Type</label>
       <select class="form-control" name="freighttype" required>
         <option> -- select -- </option>
-        <option value="LCL" <?php $form_data["pro_freighttype"] == "LCL" ? print "selected" : print "" ; ?>>LCL</option>
-        <option value="20'GP" <?php $form_data["pro_freighttype"] == "20'GP" ? print "selected" : print "" ; ?>>20'GP</option>
-        <option value="40'GP" <?php $form_data["pro_freighttype"] == "40'GP" ? print "selected" : print "" ; ?>>40'GP</option>
-        <option value="airfreight" <?php $form_data["pro_freighttype"] == "airfreight" ? print "selected" : print "" ; ?>>Airfreight</option>
+        <option value="LCL" <?php $form_data["pro_freighttype"] == "LCL" ? print "selected" : print ""; ?>>LCL</option>
+        <option value="20'GP" <?php $form_data["pro_freighttype"] == "20'GP" ? print "selected" : print ""; ?>>20'GP</option>
+        <option value="40'GP" <?php $form_data["pro_freighttype"] == "40'GP" ? print "selected" : print ""; ?>>40'GP</option>
+        <option value="airfreight" <?php $form_data["pro_freighttype"] == "airfreight" ? print "selected" : print ""; ?>>Airfreight</option>
       </select> 
     </div>
     <div class="form-group">
@@ -111,6 +128,7 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
     <button type="submit" name="generate_shipping_quote" class="btn btn-primary">Generate Shipping Quote</button>
     <button type="submit" name="submit" class="btn btn-primary">Save Product</button>
   </form>
+  <p>&nbsp;</p>
 </div>
 <script type="text/javascript">
   /**
