@@ -2,7 +2,24 @@
 session_start();
 include("../../globals.php");
 
-if(!$_REQUEST["id"]) {
+// require DOC_ROOT . '/vendor/autoload.php';
+
+// use Spipu\Html2Pdf\Html2Pdf;
+
+// $html2pdf = new Html2Pdf();
+
+// $dom = new DomDocument();
+// $dom->loadHTMLFile("./test.html") or die("error");
+
+// $html = $dom->saveHTML();
+
+// $html2pdf->writeHTML($html);
+// $html2pdf->output();
+
+// $str = "A 'quote' is <b>bold</b>";
+// $html = htmlentities($str, ENT_QUOTES);
+
+if (!$_REQUEST["id"]) {
   trigger_error("id not supplied");
   exit;
 }
@@ -15,11 +32,29 @@ $dbs = new DB_SELECT("select
                       on pro_product.pro_companyid = com_company.com_id
                       where pro_id=" . $_REQUEST["id"] . "
                       ");
-$field_value = $dbs->result()[0];             
+$field_value = $dbs->result()[0];
 
-include(SITE_HEADER);
+//include(SITE_HEADER);
+
+$html = "<div class=\"container\">";
+//$html .= "<form id=\"product\" name=\"productform\" action=\"process.php\" method=\"post\" enctype=\"multipart/form-data\">";
+//$html .= "<input type=\"hidden\" name=\"id\" value=\"" . $_REQUEST["id"] . "\">";
+$html .= "<div class=\"form-row\" id=\"first-form-header\">";
+$html .= "<h4 class =\"form-header\"> Product Details </h4>";
+$html .= "</div>";
+$html .= "</div>";
+//$html .= "</form>";
+
+$html2pdf->writeHTML($html);
+$html2pdf->output();
+
+//echo $html;
+
+
 ?>
-<div class="container">
+  </form>
+</div>
+<!-- <div class="container">
 <h2>Product Details</h2>
   <div class="table-responsive">
     <table class="table table-striped table-sm">    
@@ -92,7 +127,8 @@ include(SITE_HEADER);
     </table>
       
   </div>
-</div> <!-- /container -->
+</div>
+--->
 <?php
 include(SITE_FOOTER);
 ?>

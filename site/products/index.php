@@ -20,46 +20,39 @@ $dbs = new DB_SELECT("select
                       ");
 
 ?>
-   <div class="container">
-    <h4>Products</h4>
+  <div class="container">    
+    <h4 class="form-header">Product List</h4>            
     <div class="table-responsive">
       <table class="table table-striped table-sm">
         <thead>
           <tr>
             <th>Model No</th>
             <th>Product Name</th>
-            <th>Company</th>
-            <!--<th>Company</th>
-            <th></th>
-            <th>Header</th>-->
-            <th></th>
+            <th colspan="2">Company</th>                        
           </tr>
         </thead>
         <tbody>
           <?php 
-          for($i = 0; $i < count($dbs->result()); $i++) {     
-            $field_value = $dbs->result()[$i];             
-          ?>
+          for ($i = 0; $i < count($dbs->result()); $i++) {
+            $field_value = $dbs->result()[$i];
+            ?>
             <tr>
               <td><?php echo $field_value["pro_modelno"] ?></td>
               <td><?php echo $field_value["pro_productname"] ?></td>
-              <td><?php echo $field_value["com_companyname"] ?></td>
-              <!--<td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>-->
-              <td>
+              <td><?php echo $field_value["com_companyname"] ?></td>              
+              <td width="150">
                 <span><a href="view.php?id=<?php echo $field_value["pro_id"] ?>">View</button></span>
                 <span><a href="edit.php?id=<?php echo $field_value["pro_id"] ?>">Edit</button></span>
                 <span><a href="process.php?del=<?php echo $field_value["pro_id"] ?>">Delete</button></span>
               </td>
             </tr>
           <?php 
-          }
-          ?>
+        }
+        ?>
         </tbody>
       </table>   
     </div>    
-    <a href="edit.php">Add New</a>
+    <button type="button" class="btn btn btn-primary" name="add_new" onclick="window.location.href='edit.php'" class="btn btn-primary">Add Product</button>    
   </div> <!-- /container -->
 <?php 
 include(SITE_FOOTER);

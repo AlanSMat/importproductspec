@@ -17,6 +17,8 @@ define("INCLUDES_PATH", DOC_ROOT . "/assets/server/includes");
 define("UTILS_PATH", DOC_ROOT . "/assets/server/utils");
 define("SERVER_ASSETS_PATH", DOC_ROOT . "/assets/server");
 define("CLASSES_PATH", SERVER_ASSETS_PATH . "/classes");
+define("JSON_PATH", SERVER_ASSETS_PATH . "/json");
+define("NAV_JSON", JSON_PATH . "/nav.json");
 
 define("SCRIPTS_URL", ROOT_URL . "/assets/client/scripts");
 define("IMAGES_URL", ROOT_URL . "/assets/client/images");
@@ -27,11 +29,6 @@ define("CLIENT_URL", ROOT_URL . "/assets/client");
 define("SITE_HEADER", INCLUDES_PATH . "/header_footer/site/site_header.php");
 define("SITE_FOOTER", INCLUDES_PATH . "/header_footer/site/site_footer.php");
 define("SITE_NAV", INCLUDES_PATH . "/nav/site_nav.php");
-define("BOOTSTRAP_NAV", INCLUDES_PATH . "/nav/bootstrap_nav.php");
-define("SIDE_NAV", INCLUDES_PATH . "/nav/side_nav.php");
-define("NAV_JSON", INCLUDES_PATH . "/nav/nav.json");
-define("DUNGEONS_JSON", INCLUDES_PATH . "/json/dungeons.json");
-define("RAIDS_JSON", INCLUDES_PATH . "/json/raids.json");
 
 define("UTILS_COMMON", UTILS_PATH . "/common.php");
 
@@ -60,8 +57,4 @@ $db_conn_vars["db_name"] = DB_NAME;
 $db_conn_vars["db_username"] = DB_USERNAME;
 $db_conn_vars["db_password"] = DB_PASSWORD;
 
-//$db = new DB_CONN();
-//$db->connect();
-
-//object closed in site_footer.php
 ?>

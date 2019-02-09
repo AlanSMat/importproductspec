@@ -1,29 +1,9 @@
 <?php
 require DOC_ROOT . '/vendor/autoload.php';
 
-/*$dbs = new DB_SELECT("SELECT
-                        shq_shippingquote.shq_id AS quoteid,
-                        shq_shippingquote.shq_contact AS shipping_contact,
-                        pro_product.pro_productname AS product_name,
-                        shc_shippingcompany.shc_shcompanyname AS shipping_company
-                        FROM pro_product
-                        INNER JOIN shq_shippingquote
-                        ON pro_product.pro_id = shq_shippingquote.shq_productid    
-                        INNER JOIN shc_shippingcompany 
-                        ON shc_shippingcompany.shc_id = shq_shippingquote.shq_shippingcompanyid                  
-                      ");*/
-
-$dbs = new DB_SELECT("SELECT * 
-                      FROM shc_shippingcompany 
-                      WHERE shc_id=" . $_POST["shcompanyid"] . "");
-$shc_data = $dbs->get_form_data("shc_shippingcompany");
-
 use Spipu\Html2Pdf\Html2Pdf;
 
 $html2pdf = new Html2Pdf();
-
-//used in the quote id
-$company_substr = substr(strtoupper($shc_data["shc_shcompanyname"]), 0, 3);
 
 $html = "<link rel=\"stylesheet\" type=\"text/css\" href=\"pdf.css\"/>";
 $html .= "<div class=\"companyHeader\">";
@@ -31,6 +11,14 @@ $html .= "Steven Mather<br>";
 $html .= "Tel: 0467 972 595<br>";
 $html .= "Email: steve@asmather.com<br>";
 $html .= "ABN: 57 061 998 393<br>";
+
+$dbs = new DB_SELECT("SELECT shc_shcompanyname,
+                             shc_shphone,
+                             shc_shemail          
+                      FROM shc_shippingcompany 
+                      WHERE shc_id=" . $_POST["shcompanyid"] . "");
+$shc_data = $dbs->get_form_data("shc_shippingcompany");
+
 $html .= "Quote ID: " . substr(strtoupper($shc_data["shc_shcompanyname"]), 0, 3) . $quote_id;
 $html .= "</div >";
 
@@ -38,18 +26,26 @@ $html .= "<div class=\"shippingCompanyHeader\">";
 $html .= $shc_data["shc_shcompanyname"] . "<br>";
 $html .= $shc_data["shc_shphone"] . "<br>";
 $html .= $shc_data["shc_shemail"] . "<br>";
-//$html .= "Tel: 0467 972 595<br>";
 $html .= "</div >";
 
-$html .= "<p class=\"header\">Shipping Quote Request</p>";
+//$html .= "<p class=\"header\">Shipping Quote Request</p>";
 $html .= "<table>";
+$html .= "<tr>";
+$html .= "<td colspan=\"2\">Please provide a shipping quote based on the following information.</td>";
+$html .= "</tr>";
 $html .= "<tr>";
 $html .= "<td class=\"leftCell\">From Country:</td>";
 $html .= "<td>China</td>";
 $html .= "</tr>";
 $html .= "<tr>";
-$html .= "<td class=\"leftCell\">Port of Origin:</td>";
-$html .= "<td>China</td>";
+$html .= "<td class=\"leftCell\">From Port:</td>";
+
+$dbs = new DB_SELECT("SELECT * 
+                      FROM com_company 
+                      WHERE com_id=" . $_POST["companyid"] . "");
+$shc_data = $dbs->get_form_data("com_company");
+
+$html .= "<td>" . $shc_data["com_port"] . "</td>";
 $html .= "</tr>";
 $html .= "<tr>";
 $html .= "<td class=\"leftCell\">Goods:</td>";
@@ -61,7 +57,11 @@ $html .= "<td>Australia</td>";
 $html .= "</tr>";
 $html .= "<tr>";
 $html .= "<td class=\"leftCell\">Destination Port:</td>";
-$html .= "<td>Port Botany</td>";
+$html .= "<td>Port Botany, Sydney</td>";
+$html .= "</tr>";
+$html .= "<tr>";
+$html .= "<td class=\"leftCell\">Total Packages:</td>";
+$html .= "<td>" . $_POST["orderqty"] . "</td>";
 $html .= "</tr>";
 $html .= "<tr>";
 $html .= "<td class=\"leftCell\">Value of Goods (total):</td>";
@@ -76,7 +76,7 @@ $html .= "<td class=\"leftCell\">Shipping Terms:</td>";
 $html .= "<td>" . $_POST["shippingterms"] . "</td>";
 $html .= "</tr>";
 $html .= "<tr>";
-$html .= "<td class=\"leftCell\">Dimensions:</td>";
+$html .= "<td class=\"leftCell\">Dimensions (per package):</td>";
 $html .= "<td>W" . $_POST["width"] . " * D" . $_POST["depth"] . " * H" . $_POST["height"] . "</td>";
 $html .= "</tr>";
 $html .= "<tr>";
