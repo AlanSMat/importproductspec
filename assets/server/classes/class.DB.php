@@ -167,6 +167,9 @@ class DB_INSERT extends DB_VARIABLES
     } catch (Exception $e) {
       echo 'Message: ' . $e->getMessage();
     }
+    finally {
+      $this->pdo = null;
+    }
 
   }
 
@@ -210,7 +213,9 @@ class DB_UPDATE extends DB_VARIABLES
     } catch (Exception $e) {
       echo 'Message: ' . $e->getMessage();
     }
-
+    finally {
+      $this->pdo = null;
+    }
   }
 
 }
@@ -232,6 +237,9 @@ class DB_DELETE extends DB_VARIABLES
       $stmt->execute();
     } catch (Exception $e) {
       echo 'Message: ' . $e->getMessage();
+    }
+    finally {
+      $this->pdo = null;
     }
   }
 }

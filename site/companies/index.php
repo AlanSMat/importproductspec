@@ -25,10 +25,10 @@ $dbs = new DB_SELECT("select * from com_company");
           $field_value = $dbs->result()[$i];
           ?>
           <tr>
-            <td><a href="edit.php?id=<?php echo $field_value["com_id"] ?>"><?php echo $field_value["com_companyname"] ?></a></td>
+            <td><?php echo $field_value["com_companyname"] ?></td>
             <td>              
-              <div class="tableLink"><a href="process.php?del=<?php echo $field_value["com_id"] ?>">Delete</button></div>              
-              <div class="tableLink"><a href="edit.php?id=<?php echo $field_value["com_id"] ?>">Edit</button></div>              
+              <div class="table-link"><a href="process.php?del=<?php echo $field_value["com_id"] ?>">Delete</div>              
+              <div class="table-link"><a href="edit.php?id=<?php echo $field_value["com_id"] ?>">Edit</div>              
             </td>
           </tr>
         <?php
