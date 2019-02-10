@@ -8,17 +8,14 @@ include(SITE_HEADER);
 $dbs = new DB_SELECT("select * from com_company");
 
 ?>
-<style>
-.tableLink {  
-  width: "150px";  
-  float: right;
-  padding-right: 10px;
-}
-</style>
-   <div class="container">
-    <h4 class="form-header">Companies</h4>      
+   <div class="container">    
     <div class="table-responsive">
       <table class="table table-striped table-sm">        
+        <thead>
+          <tr class="form-header">
+            <th colspan="2">Companies</th>
+          </tr> 
+        </thead>   
         <tbody>
         <?php
         for ($i = 0; $i < count($dbs->result()); $i++) {

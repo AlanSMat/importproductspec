@@ -39,7 +39,6 @@ define("BOOTSTRAP_VERSION", "4.1.3");
 define("BOOTSTRAP_CSS", CSS_URL . "/bootstrap/" . BOOTSTRAP_VERSION . "/bootstrap.min.css");
 define("BOOTSTRAP_JS", CSS_URL . "/bootstrap/" . BOOTSTRAP_VERSION . "/bootstrap.min.js");
 define("SITE_URL", ROOT_URL . "/site");
-define("FPDF_FONTPATH", CLASSES_PATH . "/fpdf/font/");
 
 include(UTILS_COMMON);
 
@@ -56,5 +55,4 @@ $db_conn_vars["db_server_name"] = DB_SERVER_NAME;
 $db_conn_vars["db_name"] = DB_NAME;
 $db_conn_vars["db_username"] = DB_USERNAME;
 $db_conn_vars["db_password"] = DB_PASSWORD;
-
 ?>

@@ -47,16 +47,26 @@
   --main-font-color: var(--dk-blue);
   --main-reverse-bg-color: #99CED2;
   --main-reverse-font-color: #f0f0f0;
-  --main-link-color: #5F6366;
+  --main-link-color: var(--lt-purple);
   --main-link-hover-color: #999;
   --light-bg-color: #DBDFEA;
 
   --table-odd-bg-color: var(--light-bg-color);
   --table-even-bg-color: #F0F0F0;
 
-  --btn-bg-color: var(--mid-blue);
+  --btn-bg-color: var(--lt-purple);
   --btn-font-size: 14px;
 
+}
+
+label {
+  padding-left: 10px;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 0rem;
+  background-color: transparent
 }
 
 .table-striped>tbody>tr:nth-child(odd)>td,
@@ -67,6 +77,16 @@
 .table-striped>tbody>tr:nth-child(even)>td,
 .table-striped>tbody>tr:nth-child(even)>th {
   background-color: var(--table-even-bg-color);
+}
+
+tr.table-sub-header {
+  background-color: var(--olive);
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 0px solid #dee2e6;
+  font-weight: normal;
 }
 
 a {
@@ -145,10 +165,22 @@ a:hover {
   border-left: 0px;
 }
 
-.form-header {
+.form-header,
+tr.th {
   background-color: var(--main-header-bg-color);
   margin-top: 0px;
-  padding: 8px 0px 8px 8px;
+  padding: 10px 0px 10px 10px;
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--main-reverse-font-color);
+  width: 100%;
+}
+
+.table-sub-header,
+tr.th {
+  background-color: var(--main-header-bg-color);
+  margin-top: 0px;
+  padding: 10px 0px 10px 10px;
   font-size: 16px;
   font-weight: normal;
   color: var(--main-reverse-font-color);

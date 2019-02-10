@@ -233,16 +233,13 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
           <input type="text" class="form-control" name="weighttotal" name="weighttotal" id="weighttotal" placeholder="Weight Total" value="<?php echo $form_data["pro_weighttotal"] ?>">
         </div>
       </div>
-    </div>  
-  
-    <button type="submit" name="generate_shipping_quote" class="btn btn btn-primary">Generate Shipping Quote</button>
+    </div>      
     <button type="submit" name="submit" class="btn btn btn-primary">Save Product</button>
-  
+    <button type="submit" name="generate_shipping_quote" class="btn btn btn-primary">Generate Shipping Quote</button>    
   </form>
+
 </div>
-<script async src="https://cdn.omnicalculator.com/sdk.js"></script>
-  <p>&nbsp;</p>
-</div>
+<p>&nbsp;</p>
 <script type="text/javascript">
   /**
   * @param num The number to round

@@ -20,12 +20,14 @@ $dbs = new DB_SELECT("select
                       ");
 
 ?>
-  <div class="container">    
-    <h4 class="form-header">Product List</h4>            
+  <div class="container">        
     <div class="table-responsive">
       <table class="table table-striped table-sm">
         <thead>
-          <tr>
+          <tr class="form-header">
+            <th colspan="4">Product List</th>
+          </tr>
+          <tr class="table-sub-header">
             <th>Model No</th>
             <th>Product Name</th>
             <th colspan="2">Company</th>                        

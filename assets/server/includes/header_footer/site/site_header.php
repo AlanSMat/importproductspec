@@ -1,5 +1,5 @@
 <?php 
-if(!isset($page_title)) {
+if (!isset($page_title)) {
     $page_title = "";
 }
 $current_page = basename($_SERVER["REQUEST_URI"]);
@@ -18,8 +18,8 @@ $current_page = basename($_SERVER["REQUEST_URI"]);
     <meta http-equiv="pragma" content="no-cache" />            
     <link rel="stylesheet" href="<?php echo BOOTSTRAP_CSS ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo CSS_URL ?>/default.css" />
-    <script type="text/javascript" src="<?php echo SCRIPTS_URL ?>/default.js" />
-    <!-- <link rel="stylesheet" type="text/css" href="<?php echo CSS_URL ?>/side-bar.css" /> -->
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS_URL ?>/table.css" />
+    <script type="text/javascript" src="<?php echo SCRIPTS_URL ?>/default.js" />    
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>                
 </head>

@@ -2,6 +2,9 @@
 session_start();
 include("../../globals.php");
 
+var_dump($_POST);
+exit;
+
 if (isset($_REQUEST["del"])) {
   $query_string = "delete from pro_product where pro_id=" . $_REQUEST["del"] . "";
   $del = new DB_DELETE($query_string);

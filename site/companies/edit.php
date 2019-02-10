@@ -65,9 +65,9 @@ $form_data = $dbs->get_form_data("com_company");
           <input type="text" class="form-control" name="port" name="port" id="port" placeholder="Port" value="<?php echo $form_data["com_port"] ?>">
         </div>
       </div>
-    </div>    
-    <button type="submit" name="submit" class="btn btn-primary">Save Company</button>    
+    </div>        
   </form>
+  <button type="submit" name="submit" class="btn btn-primary">Save Company</button>    
 </div>
 <?php
 include(SITE_FOOTER);
