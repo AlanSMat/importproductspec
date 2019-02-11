@@ -20,7 +20,7 @@ $form_data = $dbs->get_form_data("com_company");
       <div class="form-row">
         <div class="col">
           <label for="company_name">Company Name</label>
-          <input type="text" class="form-control" name="companyname" id="companyname" placeholder="Enter Company Name" required value="<?php echo $form_data["com_companyname"] ?>">    
+          <input type="text" class="form-control" name="companyname" id="companyname" placeholder="Company Name" required value="<?php echo $form_data["com_companyname"] ?>">    
         </div>
       </div>
       <div class="form-row">
@@ -37,6 +37,20 @@ $form_data = $dbs->get_form_data("com_company");
           </div>
         </div>
         <div class="col">    
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" value="<?php echo $form_data["com_phone"] ?>">
+          </div>
+        </div>
+        <div class="col">    
+          <div class="form-group">
+            <label for="mobile">Mobile</label>
+            <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile" value="<?php echo $form_data["com_mobile"] ?>">
+          </div>
+        </div>        
+      </div>    
+      <div class="form-row">
+        <div class="col">    
           <label for="address">Company Address</label>
           <input type="text" class="form-control" name="address" id="address" placeholder="Company Address" value="<?php echo $form_data["com_address"] ?>">
         </div>
@@ -49,9 +63,7 @@ $form_data = $dbs->get_form_data("com_company");
         <div class="col">
           <label for="zip">Zip Code</label>
           <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip Code" value="<?php echo $form_data["com_zip"] ?>">
-        </div>
-      </div>    
-      <div class="form-row">
+        </div>      
         <div class="col">  
           <label for="city">City</label>
           <input type="text" class="form-control" name="city" id="city" placeholder="City" value="<?php echo $form_data["com_city"] ?>">
@@ -66,8 +78,8 @@ $form_data = $dbs->get_form_data("com_company");
         </div>
       </div>
     </div>        
-  </form>
-  <button type="submit" name="submit" class="btn btn-primary">Save Company</button>    
+    <button type="submit" name="submit" class="btn btn-primary">Save Company</button>    
+  </form>  
 </div>
 <?php
 include(SITE_FOOTER);

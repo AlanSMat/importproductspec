@@ -160,6 +160,8 @@ class DB_INSERT extends DB_VARIABLES
 
     $sql = "INSERT INTO " . $this->table_name . " SET " . parent::get_db_string();
 
+    echo $sql;
+
     try {
       $stmt = $this->pdo->prepare($sql);
       $stmt->execute($this->post_array);

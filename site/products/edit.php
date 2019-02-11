@@ -24,7 +24,7 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
         <div class="col" >        
           <label for="producttype">Product Type</label>
           <select class="form-control" name="producttype">          
-            <option> -- select product type -- </option>
+            <option value=""> -- select product type -- </option>
             <?php 
 
             $product_types = array(
@@ -72,7 +72,7 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
           $company = new DB_SELECT("select * from com_company");
           ?>      
           <select class="form-control" name="companyid" required>
-            <option> -- select company -- </option>
+            <option value=""> -- select company -- </option>
             <?php
             for ($i = 0; $i < count($company->result()); $i++) {
               $field_value = $company->result()[$i];
@@ -146,7 +146,17 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 
         <div class="col">
           <label for="retailpercent">Retail Percent</label>
-          <input type="text" onblur="calc_profit()" class="form-control" name="retailpercent" id="retailpercent" placeholder="USD Rate" value="<?php echo $form_data["pro_retailpercent"] ?>">
+          <input type="text" onblur="calc_profit()" class="form-control" name="retailpercent" id="retailpercent" placeholder="Retail Percent" value="<?php echo $form_data["pro_retailpercent"] ?>">
+        </div>
+
+        <div class="col">
+          <label for="approxsellprice">Approx Sell Price</label>
+          <input type="text" xonblur="calc_profit()" class="form-control" name="approxsellprice" id="approxsellprice" placeholder="Approx Sell Price" value="<?php echo $form_data["pro_approxsellprice"] ?>">
+        </div>
+
+        <div class="col">
+          <label for="retailprofit">Retail Profit</label>
+          <input type="text" onblur="calc_profit()" class="form-control" name="retailprofit" id="retailprofit" placeholder="Retail Profit" value="<?php echo $form_data["pro_retailprofit"] ?>">
         </div>
 
         <div class="col">
@@ -193,7 +203,7 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
           $company = new DB_SELECT("select * from shc_shippingcompany");
           ?>      
           <select class="form-control" name="shcompanyid">
-            <option> -- select company -- </option>
+            <option value=""> -- select company -- </option>
             <?php
             for ($i = 0; $i < count($company->result()); $i++) {
               $field_value = $company->result()[$i];
@@ -273,7 +283,9 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
   }
 
   function calc_profit() {
-    form.estprofit.value =  parseFloat(form.retailpricetotal.value * form.retailpercent.value - form.roughlandedcost.value).toFixed(2);
+    form.approxsellprice.value = parseFloat(form.retailpricetotal.value * (form.retailpercent.value / 100)).toFixed(2);
+    form.retailprofit.value    = parseFloat(form.retailpricetotal.value - form.approxsellprice.value).toFixed(2);
+    form.estprofit.value       = parseFloat(form.approxsellprice.value - form.roughlandedcost.value).toFixed(2);
   }
 
   function calc_total_price() {        
@@ -282,7 +294,7 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
   }
 
   function calc_weight_total() {            
-    let total_weight = parseFloat(form.orderqty.value * form.weightunit.value).toFixed(2);    
+    let total_weight = parseFloat(form.orderqty.value * form.weightunit.value);    
     
     form.weighttotal.value = total_weight;
   }

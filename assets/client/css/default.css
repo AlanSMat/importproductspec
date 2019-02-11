@@ -80,7 +80,8 @@ table {
 }
 
 tr.table-sub-header {
-  background-color: var(--olive);
+  color: var(--main-font-color);
+  background-color: var(--main-reverse-bg-color);
 }
 
 .table thead th {
@@ -128,6 +129,10 @@ a:hover {
   font-size: var(--btn-font-size);
 }
 
+.form-control::-webkit-input-placeholder {
+  color: #C0C0C0;
+}
+
 #first-form-header {
   margin-top: 0px;
 }
@@ -165,8 +170,13 @@ a:hover {
   border-left: 0px;
 }
 
+.table.table-sm {
+  padding: 40px;
+}
+
 .form-header,
-tr.th {
+tr.th,
+.tr.th.form-header {
   background-color: var(--main-header-bg-color);
   margin-top: 0px;
   padding: 10px 0px 10px 10px;

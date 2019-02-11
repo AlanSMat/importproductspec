@@ -8,12 +8,12 @@ include(SITE_HEADER);
 $dbs = new DB_SELECT("select * from com_company");
 
 ?>
-   <div class="container">    
+   <div class="container">        
     <div class="table-responsive">
       <table class="table table-striped table-sm">        
         <thead>
-          <tr class="form-header">
-            <th colspan="2">Companies</th>
+          <tr>
+            <th colspan="2" class="form-header">Companies</th>
           </tr> 
         </thead>   
         <tbody>
@@ -35,7 +35,7 @@ $dbs = new DB_SELECT("select * from com_company");
         </tbody>
       </table>
     </div>
-    <button type="button" class="btn btn btn-primary" name="add_new" onclick="window.location.href='edit.php'" class="btn btn-primary">Add Companies</button>    
+    <button type="button" class="btn btn btn-primary" name="add_new" onclick="window.location.href='edit.php'" class="btn btn-primary">Add Company</button>    
   </div> <!-- /container -->
 <?php 
 include(SITE_FOOTER);

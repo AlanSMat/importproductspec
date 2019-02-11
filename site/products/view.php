@@ -23,8 +23,17 @@ $form_data = $products->result()[0];
 isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["companyid"] : $companyidid = 0;
 ?>
 <div class="container">
-  <form id="product" name="productform" action="process.php" method="post" enctype="multipart/form-data">
+  <form id="product" name="productform" action="process.php" method="post" enctype="multipart/form-data">  
     <input type="hidden" name="id" value="<?php echo $id ?>">
+    <?php 
+    // all form field on this page have been disabled, add this so that post field would be available for generate shipping quote
+    foreach ($form_data as $key => $value) {
+      ?>
+      <input type="hidden" name="<?php echo substr($key, 4) ?>" value="<?php echo $value ?>" />
+      <?php
+
+    }
+    ?>
 
     <div class="form-row" id="first-form-header">
         <h4 class="form-header">Product Details</h4>        
@@ -44,13 +53,15 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 
       <div class="form-row">
         <div class="col">
-          <label for="alibabaurl">Alibaba Link</label>
-          <a href="<?php echo $form_data["pro_alibabaurl"] ?>"><input type="text" disabled class="form-control" name="alibabaurl" name="alibabaurl" id="alibabaurl" placeholder="Alibaba URL" value="<?php echo $form_data["pro_alibabaurl"] ?>"></a>
+          <label for="alibabaurl">Alibaba URL<?php if ($form_data["pro_alibabaurl"] !== "") { ?> - <a href="<?php echo $form_data["pro_alibabaurl"] ?>" target="_blank">Link to product</a><?php 
+                                                                                                                                                                                        } ?></label>
+          <input type="text" disabled class="form-control" name="alibabaurl" name="alibabaurl" id="alibabaurl" placeholder="Alibaba URL" value="<?php echo $form_data["pro_alibabaurl"] ?>">
         </div>
       </div>
       <div class="form-row">
         <div class="col">
-          <label for="retailurl">Retail URL</label>
+          <label for="retailurl">Retail URL<?php if ($form_data["pro_retailurl"] !== "") { ?> - <a href="<?php echo $form_data["pro_retailurl"] ?>" target="_blank">Link to product</a><?php 
+                                                                                                                                                                                    } ?></label>
           <input type="text" class="form-control" disabled name="retailurl" name="retailurl" id="retailurl" placeholder="Retail URL" value="<?php echo $form_data["pro_retailurl"] ?>">    
         </div>
       </div>
@@ -85,12 +96,12 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
           
         <div class="col">
           <label for=" ">Quoted price</label>
-          <input type="text" class="form-control" disabled onblur="calc_total_price()" name="quotedprice" id="quotedprice" placeholder="Quoted Price" value="<?php echo $form_data["pro_quotedprice"] ?>">
+          <input type="text" class="form-control" disabled onblur="calc_total_price()" name="quotedprice" id="quotedprice" placeholder="Quoted Price" value="$<?php echo $form_data["pro_quotedprice"] ?>">
         </div>      
         
         <div class="col">
           <label for="totalprice">Total Price</label>
-          <input type="text" class="form-control" disabled name="totalprice" id="totalprice" placeholder="Total Price" value="<?php echo $form_data["pro_totalprice"] ?>">
+          <input type="text" class="form-control" disabled name="totalprice" id="totalprice" placeholder="Total Price" value="$<?php echo $form_data["pro_totalprice"] ?>">
         </div>
 
         <div class="col">
@@ -100,7 +111,7 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 
         <div class="col">
           <label for="roughlandedcost">Rough Landed Cost</label>
-          <input type="text" disabled xonblur="calc_margin()" class="form-control" name="roughlandedcost" id="roughlandedcost" placeholder="Rough Landed Cost" value="<?php echo $form_data["pro_roughlandedcost"] ?>">
+          <input type="text" disabled xonblur="calc_margin()" class="form-control" name="roughlandedcost" id="roughlandedcost" placeholder="Rough Landed Cost" value="$<?php echo $form_data["pro_roughlandedcost"] ?>">
         </div>
       </div>
     </div>
@@ -113,27 +124,37 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
       <div class="form-row">
         <div class="col">
           <label for="retailprice">Retail Price Unit</label>
-          <input type="text" disabled class="form-control" onblur="calc_retail_price_total()" name="retailpriceunit" id="retailpriceunit" placeholder="Retail Price Unit" value="<?php echo (int)$form_data["pro_retailpriceunit"] ?>">
+          <input type="text" disabled class="form-control" onblur="calc_retail_price_total()" name="retailpriceunit" id="retailpriceunit" placeholder="Retail Price Unit" value="$<?php echo (int)$form_data["pro_retailpriceunit"] ?>">
         </div>
 
         <div class="col">
           <label for="retailprice">Retail Price Total</label>
-          <input type="text" disabled onblur="calc_margin()" class="form-control" name="retailpricetotal" id="retailpricetotal" placeholder="Retail Price Total" value="<?php echo (int)$form_data["pro_retailpricetotal"] ?>">
+          <input type="text" disabled onblur="calc_margin()" class="form-control" name="retailpricetotal" id="retailpricetotal" placeholder="Retail Price Total" value="$<?php echo (int)$form_data["pro_retailpricetotal"] ?>">
         </div>
 
         <div class="col">
           <label for="margin">Estimated Margin</label>
-          <input type="text" disabled class="form-control" name="margin" id="margin" placeholder="Margin" value="<?php echo (int)$form_data["pro_margin"] ?>">
+          <input type="text" disabled class="form-control" name="margin" id="margin" placeholder="Margin" value="$<?php echo (int)$form_data["pro_margin"] ?>">
         </div>
 
         <div class="col">
           <label for="retailpercent">Retail Percent</label>
-          <input type="text" disabled onblur="calc_profit()" class="form-control" name="retailpercent" id="retailpercent" placeholder="USD Rate" value="<?php echo $form_data["pro_retailpercent"] ?>">
+          <input type="text" disabled class="form-control" name="retailpercent" id="retailpercent" placeholder="Retail Percent" value="<?php echo $form_data["pro_retailpercent"] ?>%">
+        </div>
+
+        <div class="col">
+          <label for="approxsellprice">Approx Sell Price</label>
+          <input type="text" disabled class="form-control" name="approxsellprice" id="approxsellprice" placeholder="Approx Sell Price" value="$<?php echo $form_data["pro_approxsellprice"] ?>">
+        </div>
+
+        <div class="col">
+          <label for="retailprofit">Retail Profit</label>
+          <input type="text" disabled class="form-control" name="retailprofit" id="retailprofit" placeholder="Retail Profit" value="$<?php echo $form_data["pro_retailprofit"] ?>">
         </div>
 
         <div class="col">
           <label for="estprofit">Estimated Profit</label>
-          <input type="text" disabled class="form-control" name="estprofit" id="estprofit" placeholder="Est Profit" value="<?php echo $form_data["pro_estprofit"] ?>">
+          <input type="text" disabled class="form-control" name="estprofit" id="estprofit" placeholder="Est Profit" value="$<?php echo $form_data["pro_estprofit"] ?>">
         </div>
       </div>
     </div>

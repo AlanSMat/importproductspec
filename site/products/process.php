@@ -2,8 +2,13 @@
 session_start();
 include("../../globals.php");
 
-var_dump($_POST);
-exit;
+if (isset($_POST["companyname"])) {
+  unset($_POST["companyname"]);
+}
+
+if (isset($_POST["shcompanyname"])) {
+  unset($_POST["shcompanyname"]);
+}
 
 if (isset($_REQUEST["del"])) {
   $query_string = "delete from pro_product where pro_id=" . $_REQUEST["del"] . "";
@@ -18,8 +23,11 @@ if (isset($_POST["id"]) && $_POST["id"] != 0) {
   $id = $_POST["id"];
   $where_clause = "WHERE pro_id = " . $_POST["id"] . "";
 
+
+
   try {
     $upd = new DB_UPDATE("pro_product", $_POST, $where_clause);
+
   } catch (Exception $e) {
     echo $e->message;
     exit;
@@ -41,9 +49,12 @@ if (isset($_POST["id"]) && $_POST["id"] != 0) {
 } else if (isset($_POST) && $_POST["id"] < 1) {
 
   $insert = new DB_INSERT("pro_product", $_POST);
-  $id = $insert->insert_id();
+
+  if (!$id = $insert->insert_id()) {
+    exit;
+  };
 
 }
 
-header("LOCATION: edit.php?id=" . $id . "");
+header("LOCATION: view.php?id=" . $id . "");
 ?>
