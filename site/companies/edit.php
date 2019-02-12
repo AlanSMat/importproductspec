@@ -25,7 +25,8 @@ $form_data = $dbs->get_form_data("com_company");
       </div>
       <div class="form-row">
         <div class="col">
-          <label for="companyurl">Company URL</label>
+          <label for="companyurl">Company URL <?php if ($form_data["com_companyurl"] !== "") { ?> - <a href="<?php echo $form_data["com_companyurl"] ?>" target="_blank">Link to company</a><?php 
+                                                                                                                                                                                          } ?></label>
           <input type="text" class="form-control" name="companyurl" id="companyurl" placeholder="Company URL" required value="<?php echo $form_data["com_companyurl"] ?>">
         </div>
       </div>
@@ -81,6 +82,26 @@ $form_data = $dbs->get_form_data("com_company");
     <button type="submit" name="submit" class="btn btn-primary">Save Company</button>    
   </form>  
 </div>
+<script type="text/javascript">
+
+function set_disabled() {
+  var inputFields = companyform.getElementsByTagName("input"), nbIF = inputFields.length;
+
+  for(var iIF = 0; iIF < nbIF; iIF++) {      
+    inputFields[iIF].disabled = true;
+  }
+
+}
+<?php
+if (isset($_REQUEST["view"])) {
+  ?>
+  set_disabled();
+<?php
+
+}
+?>
+
+</script>
 <?php
 include(SITE_FOOTER);
 ?>

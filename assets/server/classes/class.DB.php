@@ -151,8 +151,24 @@ class DB_INSERT extends DB_VARIABLES
   {
     $this->table_name = $table_name;
     $this->post_array = $post_array;
+    //$this->uuid = $this->_uuid();
     $this->db_variables = parent::__construct($table_name, $this->post_array);
     $this->insert_id = $this->insert_record();
+  }
+
+  // creates a uuid then checked db table to see that uuid already exisits
+  private function _uuid()
+  {
+    $id_field = $this->get_table_prefix() . "id";
+
+    $uuid = md5(uniqid(rand(), true));
+
+    $sql = "SELECT " . $id_field . " FROM " . $this->table_name;
+    $stmt = $this->pdo->prepare($sql);
+
+    if ($stmt->rowCount() < 1) {
+      return $uuid;
+    }
   }
 
   public function insert_record()
@@ -160,14 +176,13 @@ class DB_INSERT extends DB_VARIABLES
 
     $sql = "INSERT INTO " . $this->table_name . " SET " . parent::get_db_string();
 
-    echo $sql;
-
     try {
       $stmt = $this->pdo->prepare($sql);
       $stmt->execute($this->post_array);
       return $insert_id = $this->pdo->lastInsertId();
     } catch (Exception $e) {
       echo 'Message: ' . $e->getMessage();
+      exit;
     }
     finally {
       $this->pdo = null;
@@ -214,6 +229,7 @@ class DB_UPDATE extends DB_VARIABLES
       $stmt->execute($this->post_array);
     } catch (Exception $e) {
       echo 'Message: ' . $e->getMessage();
+      exit;
     }
     finally {
       $this->pdo = null;
@@ -272,7 +288,7 @@ class DB_SELECT
 
   }
 
-    // get column names and return them in the key in an associative array, value is set to ""
+    // get column names and return them as the key in an associative array, value is set to ""
   public function get_form_data($table_name)
   {
     $this->table_name = $table_name;

@@ -23,9 +23,10 @@ $dbs = new DB_SELECT("select * from com_company");
           ?>
           <tr>
             <td><?php echo $field_value["com_companyname"] ?></td>
-            <td>              
+            <td>                            
               <div class="table-link"><a href="process.php?del=<?php echo $field_value["com_id"] ?>">Delete</div>              
               <div class="table-link"><a href="edit.php?id=<?php echo $field_value["com_id"] ?>">Edit</div>              
+              <div class="table-link"><a href="edit.php?view=1&id=<?php echo $field_value["com_id"] ?>">View</div>              
             </td>
           </tr>
         <?php

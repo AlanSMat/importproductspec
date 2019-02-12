@@ -2,7 +2,7 @@
 date_default_timezone_set("Australia/Sydney");
 
 if ($_SERVER["SERVER_NAME"] == 'localhost') {
-    define("LOCAL_DIR", "importproductspec");
+    define("LOCAL_DIR", "asm/importproductspec");
     define("DOC_ROOT", $_SERVER['DOCUMENT_ROOT'] . "/" . LOCAL_DIR);
     define("ROOT_URL", "http://" . $_SERVER["SERVER_NAME"] . "/" . LOCAL_DIR);
 } else {

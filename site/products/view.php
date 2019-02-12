@@ -206,11 +206,11 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
       <div class="form-row">
         <div class="col">
           <label for="weightunit">Weight Per Unit</label>
-          <input type="text" class="form-control" disabled onblur="calc_weight_total()" name="weightunit" name="weightunit" id="weightunit" placeholder="Weight Per Unit" value="<?php echo $form_data["pro_weightunit"] ?>">
+          <input type="text" class="form-control" disabled onblur="calc_weight_total()" name="weightunit" name="weightunit" id="weightunit" placeholder="Weight Per Unit" value="<?php echo $form_data["pro_weightunit"] ?>KG">
         </div>    
         <div class="col">
           <label for="weighttotal">Weight Total</label>
-          <input type="text" class="form-control" disabled name="weighttotal" name="weighttotal" id="weighttotal" placeholder="Weight Total" value="<?php echo $form_data["pro_weighttotal"] ?>">
+          <input type="text" class="form-control" disabled name="weighttotal" name="weighttotal" id="weighttotal" placeholder="Weight Total" value="<?php echo $form_data["pro_weighttotal"] ?>KG">
         </div>
       </div>
     </div>          
