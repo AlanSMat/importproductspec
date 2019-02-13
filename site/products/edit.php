@@ -251,6 +251,78 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 </div>
 <p>&nbsp;</p>
 <script type="text/javascript">
+//   var person = {
+//     firstname: 'John',
+//     lastname: 'Smith',
+//     age: 27,
+
+//     daughter: {
+//       name: 'Mary',
+//       age: 5
+//     },
+
+//     myFunc: function(par) {
+      
+//       fatherName + ' and she is ' + daughterAge + ' years old');
+
+//     }
+//   };
+
+//   person.myFunc('Jane', 
+//                 'Doe', 
+//                 4);
+
+
+// console.log(person.daughter.name);
+
+  // var formId = 'product';
+
+  // var formElm = {
+  //   element: document.getElementById(formId),
+
+  //   roundUp: function(num, precision) {
+  //     precision = Math.pow(10, precision)
+  //     Math.ceil(num * precision) / precision
+  //   }
+  // }
+
+  var students = {
+    
+    
+    // const bgrade = 81,
+    // const cgrade = 71,
+    // const dgrade = 61,
+    // const egrade = 51
+
+    getGrade: function(score) {      
+      let grade = 'F';
+
+      if(score >= 91) {
+        grade = 'A';
+      }
+      
+      console.log(grade);
+
+      return grade;
+    },
+    
+    score: function(name, score1, score2) {      
+      var totalScore = parseInt(score1) + parseInt(score2);
+
+    } 
+
+  };
+
+  console.log(students.getGrade(91));
+
+  // console.log(person);
+  // console.log(person.daughter.name);
+
+  // person.myFunc(person.daughter.name, 
+  //               person.firstname, 
+  //               person.daughter.age);
+
+  
   /**
   * @param num The number to round
   * @param precision The number of decimal places to preserve
