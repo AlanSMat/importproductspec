@@ -6,16 +6,16 @@ include(SITE_HEADER);
 
 isset($_REQUEST["id"]) ? $id = $_REQUEST["id"] : $id = 0;
 
-$products = new DB_SELECT("select
+$products = new DB_SELECT("SELECT
                             com_company.com_companyname,
                             shc_shippingcompany.shc_shcompanyname,
                             pro_product.*
-                      from pro_product
-                      inner join com_company
-                      on pro_product.pro_companyid = com_company.com_id
-                      inner join shc_shippingcompany 
-                      on pro_product.pro_shcompanyid = shc_shippingcompany.shc_id
-                      where pro_id=" . $_REQUEST["id"] . "
+                      FROM pro_product
+                      INNER JOIN com_company
+                      ON pro_product.pro_companyid = com_company.com_id
+                      INNER JOIN shc_shippingcompany 
+                      ON pro_product.pro_shcompanyid = shc_shippingcompany.shc_id
+                      WHERE pro_id=" . $_REQUEST["id"] . "
                       ");
 
 $form_data = $products->result()[0];

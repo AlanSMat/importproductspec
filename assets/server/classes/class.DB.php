@@ -151,7 +151,6 @@ class DB_INSERT extends DB_VARIABLES
   {
     $this->table_name = $table_name;
     $this->post_array = $post_array;
-    //$this->uuid = $this->_uuid();
     $this->db_variables = parent::__construct($table_name, $this->post_array);
     $this->insert_id = $this->insert_record();
   }
@@ -164,6 +163,7 @@ class DB_INSERT extends DB_VARIABLES
     $uuid = md5(uniqid(rand(), true));
 
     $sql = "SELECT " . $id_field . " FROM " . $this->table_name;
+
     $stmt = $this->pdo->prepare($sql);
 
     if ($stmt->rowCount() < 1) {
@@ -288,28 +288,32 @@ class DB_SELECT
 
   }
 
-    // get column names and return them as the key in an associative array, value is set to ""
-  public function get_form_data($table_name)
+  /** 
+   * generates a query result which gets all of the column names
+   */
+  public function get_form_data($table_array)
   {
-    $this->table_name = $table_name;
 
-    $raw_column_data = $this->_get_raw_column_data();
-
-    $field_names = array();
-
-    for ($i = 0; $i < count($raw_column_data); $i++) {
-      isset($this->result()[0][$raw_column_data[$i]["Field"]]) ? $field_value = $this->result()[0][$raw_column_data[$i]["Field"]] : $field_value = "";
-      $field_names[$raw_column_data[$i]["Field"]] = $field_value;
+    if (!is_array($table_array)) {
+      trigger_error("passed value is not an array");
+      exit;
     }
 
-    return $field_names;
+    $table_string = "";
 
-  }
+    // create a string for column select query
+    for ($i = 0; $i < count($table_array); $i++) {
+      $table_string .= "'$table_array[$i]'";
 
-  private function _get_raw_column_data()
-  {
+      // if its not the last column in the array put a comma ',' after it
+      if ($i < count($table_array) - 1)
+        $table_string .= ", ";
+    }
 
-    $query = 'SHOW COLUMNS FROM ' . $this->table_name;
+    $query = "SELECT column_name, table_name 
+              FROM `information_schema`.`columns` 
+              WHERE `table_schema` = DATABASE() AND `table_name` in ($table_string);
+            ";
 
     try {
       $stmt = $this->pdo->prepare($query);
@@ -318,8 +322,16 @@ class DB_SELECT
       echo 'Message: ' . $e->getMessage();
     }
 
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
+    $raw_column_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $field_names = array();
+
+    for ($i = 0; $i < count($raw_column_data); $i++) {
+      isset($this->result()[0][$raw_column_data[$i]["column_name"]]) ? $field_value = $this->result()[0][$raw_column_data[$i]["column_name"]] : $field_value = "";
+      $field_names[$raw_column_data[$i]["column_name"]] = $field_value;
+    }
+
+    return $field_names;
 
   }
 

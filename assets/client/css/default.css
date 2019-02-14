@@ -38,25 +38,40 @@
 
   --mid-blue: #265077;
   --dk-blue: #022140;
-  --lt-purple: #494B68;
+  --lt-purple: #86B3D1;
+  --dk-purple: #494B68;
   --dk-green: #1E4258;
   --olive: #2D5F5D;
+  --lt-green: #99CED3;
 
   --main-bg-color: var(--dk-green);
   --main-header-bg-color: var(--main-bg-color);
   --main-font-color: var(--dk-blue);
   --main-reverse-bg-color: #99CED2;
   --main-reverse-font-color: #f0f0f0;
-  --main-link-color: var(--lt-purple);
+  --main-link-color: var(--dk-purple);
   --main-link-hover-color: #999;
   --light-bg-color: #DBDFEA;
 
   --table-odd-bg-color: var(--light-bg-color);
   --table-even-bg-color: #F0F0F0;
 
-  --btn-bg-color: var(--lt-purple);
+  --btn-bg-color: var(--dk-purple);
   --btn-font-size: 14px;
 
+}
+
+body {
+  background-color: var(--lt-purple);
+  background-image: url("http://localhost/asm/importproductspec/assets/client/images/ship4.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 100%;
+  background-size: cover;
+}
+
+input {
+  background-color: var(--main-reverse-font-color);
 }
 
 label {
@@ -225,7 +240,6 @@ tr.th {
 
 .section-panel {
   margin: 0px 0px 15px 0px;
-
 }
 
 .starter-template {
@@ -248,10 +262,4 @@ tr.th {
   float: right;
   width: "120px";
   padding-right: 10px;
-}
-
-/* side nav*/
-.wrapper {
-  display: flex;
-  align-items: stretch;
 }

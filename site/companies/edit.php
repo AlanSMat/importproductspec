@@ -6,8 +6,12 @@ include(SITE_HEADER);
 
 isset($_REQUEST["id"]) ? $id = $_REQUEST["id"] : $id = 0;
 
-$dbs = new DB_SELECT("select * from com_company where com_id = " . $id . "");
-$form_data = $dbs->get_form_data("com_company");
+$dbs = new DB_SELECT("SELECT * FROM com_company WHERE com_id = " . $id . "");
+
+$table_array[0] = "com_company";
+
+$form_data = $dbs->get_form_data($table_array);
+
 
 ?>
 <div class="container">

@@ -6,8 +6,12 @@ include(SITE_HEADER);
 
 isset($_REQUEST["id"]) ? $id = $_REQUEST["id"] : $id = 0;
 
-$products = new DB_SELECT("select * from pro_product where pro_id = " . $id . "");
-$form_data = $products->get_form_data("pro_product");
+$products = new DB_SELECT("SELECT * FROM pro_product WHERE pro_id = " . $id . "");
+
+$table_array[0] = "com_company";
+$table_array[1] = "pro_product";
+
+$form_data = $products->get_form_data($table_array);
 
 isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["companyid"] : $companyidid = 0;
 ?>
@@ -102,12 +106,12 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
         </div>      
           
         <div class="col">
-          <label for=" ">Quoted price</label>
+          <label for=" ">Quoted Price Unit</label>
           <input type="text" class="form-control" onblur="calc_total_price()" name="quotedprice" id="quotedprice" placeholder="Quoted Price" value="<?php echo $form_data["pro_quotedprice"] ?>">
         </div>      
         
         <div class="col">
-          <label for="totalprice">Total Price</label>
+          <label for="totalprice">Quoted Price Total</label>
           <input type="text" class="form-control" name="totalprice" id="totalprice" placeholder="Total Price" value="<?php echo $form_data["pro_totalprice"] ?>">
         </div>
 
