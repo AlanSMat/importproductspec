@@ -16,7 +16,7 @@ $form_data = $products->get_form_data($table_array);
 isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["companyid"] : $companyidid = 0;
 ?>
 <div class="container">
-  <form id="product" name="productform" action="process.php" method="post" enctype="multipart/form-data">
+  <form id="productform" name="productform" action="process.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?php echo $id ?>">
 
     <div class="form-row" id="first-form-header">
@@ -255,88 +255,48 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 </div>
 <p>&nbsp;</p>
 <script type="text/javascript">
-//   var person = {
-//     firstname: 'John',
-//     lastname: 'Smith',
-//     age: 27,
 
-//     daughter: {
-//       name: 'Mary',
-//       age: 5
-//     },
+//form = document.getElementById('productform');
 
-//     myFunc: function(par) {
-      
-//       fatherName + ' and she is ' + daughterAge + ' years old');
+//console.log(form.orderqty.value);
 
-//     }
-//   };
-
-//   person.myFunc('Jane', 
-//                 'Doe', 
-//                 4);
-
-
-// console.log(person.daughter.name);
-
-  // var formId = 'product';
-
-  // var formElm = {
-  //   element: document.getElementById(formId),
-
-  //   roundUp: function(num, precision) {
-  //     precision = Math.pow(10, precision)
-  //     Math.ceil(num * precision) / precision
-  //   }
-  // }
-
-  var students = {
-    
-    
-    // const bgrade = 81,
-    // const cgrade = 71,
-    // const dgrade = 61,
-    // const egrade = 51
-
-    getGrade: function(score) {      
-      let grade = 'F';
-
-      if(score >= 91) {
-        grade = 'A';
-      }
-      
-      console.log(grade);
-
-      return grade;
-    },
-    
-    score: function(name, score1, score2) {      
-      var totalScore = parseInt(score1) + parseInt(score2);
-
-    } 
-
-  };
-
-  console.log(students.getGrade(91));
-
-  // console.log(person);
-  // console.log(person.daughter.name);
-
-  // person.myFunc(person.daughter.name, 
-  //               person.firstname, 
-  //               person.daughter.age);
-
+class Form {
   
-  /**
-  * @param num The number to round
-  * @param precision The number of decimal places to preserve
-  */
-  function roundUp(num, precision) {
-    precision = Math.pow(10, precision)
-    return Math.ceil(num * precision) / precision
-  }
+  constructor(formId) {
+    this.formObj = document.getElementById(formId);
+    this.orderQtyValue = this.formObj.orderqty.value;
+    this.retailPriceUnitValue = this.formObj.retailpriceunit.value;
+    this.retailPriceTotalValue = this.formObj.retailpricetotal.value;
+    this.retailPriceUnitValue = this.formObj.retailpriceunit.value;
+    this.roughLandedCostValue = this.formObj.roughlandedcost.value;
+    this.totalPriceValue = this.formObj.totalprice.value;
+    this.qoutedPriceValue = this.formObj.quotedprice.value;
+    this.approxSellPriceValue = this.formObj.approxsellprice.value;
+    this.weightUnitValue = this.formObj.weightunit.value
+    this.usdRateValue = this.formObj.usdrate.value;
+    
+    this.populateCalcFields = function() {
 
-  let form = document.getElementById("product");
+    }
+
+    this.calcRetailPriceTotal = function(){
+      let totalRetailPrice = this.orderQtyValue * this.retailPriceUnit;
+      return totalRetailPrice;
+    }
+
+    this.getOrderQty = function() {      
+      return this.orderQty;
+    }
+
+    this.calcTotal = function(num1, num2) {
+
+    }
+
+  }
+}
+
+form = new Form('productform');  
+
 
   function populate_calc_fields() {
     calc_total_price();
