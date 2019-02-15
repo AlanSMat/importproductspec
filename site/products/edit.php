@@ -260,10 +260,27 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 
 //console.log(form.orderqty.value);
 
+const formObj = document.getElementById("productform");
+
+let formField = {
+  "orderQtyValue" : formObj.orderqty.value,
+  "retailPriceUnitValue" : this.formObj.retailpriceunit.value;
+    this.retailPriceTotalValue = this.formObj.retailpricetotal.value;
+    this.retailPriceUnitValue = this.formObj.retailpriceunit.value;
+    this.roughLandedCostValue = this.formObj.roughlandedcost.value;
+    this.totalPriceValue = this.formObj.totalprice.value;
+    this.qoutedPriceValue = this.formObj.quotedprice.value;
+    this.approxSellPriceValue = this.formObj.approxsellprice.value;
+    this.weightUnitValue = this.formObj.weightunit.value
+    this.usdRateValue = this.formObj.usdrate.value;
+}
+
+//console.log(formField.orderQtyValue);
+
 class Form {
   
   constructor(formId) {
-    this.formObj = document.getElementById(formId);
+    /*this.formObj = document.getElementById(formId);
     this.orderQtyValue = this.formObj.orderqty.value;
     this.retailPriceUnitValue = this.formObj.retailpriceunit.value;
     this.retailPriceTotalValue = this.formObj.retailpricetotal.value;
@@ -273,7 +290,7 @@ class Form {
     this.qoutedPriceValue = this.formObj.quotedprice.value;
     this.approxSellPriceValue = this.formObj.approxsellprice.value;
     this.weightUnitValue = this.formObj.weightunit.value
-    this.usdRateValue = this.formObj.usdrate.value;
+    this.usdRateValue = this.formObj.usdrate.value;*/
     
     this.populateCalcFields = function() {
 
@@ -295,7 +312,7 @@ class Form {
   }
 }
 
-form = new Form('productform');  
+let prodForm = new Form('productform');  
 
 
   function populate_calc_fields() {
