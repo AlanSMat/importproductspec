@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+  margin-bottom: 0rem;
+  background-color: transparent
+}
+
+
+.table th {
+  border-top: 0px solid #dee2e6
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 0px solid #dee2e6;
+  font-weight: normal;
+}
+
+.table-sm td,
+.table-sm th,
+.table-sm tr {
+  padding: .4rem;
+  padding: 7px 0px 7px 10px;
+}

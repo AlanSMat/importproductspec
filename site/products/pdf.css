@@ -1,0 +1,32 @@
+td {
+  font-size:18px;
+  padding: 10px 0px 10px 20px;  
+  font-style: italic; 
+}
+
+.companyHeader {
+  font-size:18px;
+  text-align: right;
+  padding: 30px 30px 10px 30px;  
+  line-height: 1.4;
+}
+
+.shippingCompanyHeader {
+  font-size:18px;
+  text-align: left;
+  padding: 30px 30px 10px 20px;  
+  line-height: 1.4;
+}
+
+.header {
+  font-size:24px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.leftCell{  
+  font-weight:normal;
+  font-style: normal;
+  padding-right: 20px;
+}

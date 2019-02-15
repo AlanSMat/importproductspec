@@ -1,0 +1,28 @@
+{
+  "liveServer.settings.port": 0,
+  "liveServer.settings.root": "../ls",
+  "liveServer.settings.CustomBrowser": "chrome",
+  "liveServer.settings.AdvanceCustomBrowserCmdLine": "chrome --incognito --remote-debugging-port=9222",
+  "liveServer.settings.NoBrowser": false,
+  "liveServer.settings.ignoreFiles": [
+    ".vscode/**",
+    "**/*.scss",
+    "**/*.sass"
+  ]
+
+}, {
+  "markdown.preview.fontSize": 13,
+  "[markdown]": {
+    "editor.fontSize": 14,
+    "editor.wordWrap": "off",
+    "files.trimTrailingWhitespace": false,
+    "editor.minimap.enabled": false
+  },
+  // "liveServer.settings.proxy": {
+  //     "enable": true,
+  //     "baseUri": "/",
+  //     "proxyUri": "http://127.0.0.1:80"
+  // }
+} {
+  "editor.fontLigatures": true
+}
