@@ -270,14 +270,36 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
     elements.quotedpricetotal.value = total_price;
   }
 
+  class FormCalc {
+
+    constructor(formId) {
+      this.formId = formId;
+      this.formElements = document.getElementById(formId).elements;
+    }
+    
+    sumValue() {
+
+    }
+    
+    addEventListenerAndSetTargetValue(event, elmTarget, sumValue) {
+      elmTarget.addEventListener(event, () => {      
+        elmTarget.value = sumValue; 
+      });  
+    }
+
+  }
+
   for(let i = 0; i < elements.length; i++) {
 
-    let sum = 0;
+    let sumValue = 0;
 
     switch(elements[i].name) {
 
       case "quotedpricetotal" :
-        sumValue = parseFloat(elements.orderqty.value * elements.quotedpriceunit.value).toFixed(2);
+        const sumVal = {
+          "" : ;
+        }
+        //sumValue = parseFloat(elements.orderqty.value * elements.quotedpriceunit.value).toFixed(2);
         addEventListenerAndSetTargetValue('focus',elements[elements[i].name], sumValue);
         break;
 
