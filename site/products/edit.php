@@ -107,12 +107,12 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
           
         <div class="col">
           <label for=" ">Quoted Price Unit</label>
-          <input type="text" class="form-control" onblur="calc_total_price()" name="quotedprice" id="quotedprice" placeholder="Quoted Price" value="<?php echo $form_data["pro_quotedprice"] ?>">
+          <input type="text" class="form-control" onblur="calc_total_price()" name="quotedpriceunit" id="quotedpriceunit" placeholder="Quoted Price Unit" value="<?php echo $form_data["pro_quotedpriceunit"] ?>">
         </div>      
         
         <div class="col">
-          <label for="totalprice">Quoted Price Total</label>
-          <input type="text" class="form-control" name="totalprice" id="totalprice" placeholder="Total Price" value="<?php echo $form_data["pro_totalprice"] ?>">
+          <label for="quotedpricetotal">Quoted Price Total</label>
+          <input type="text" class="form-control" name="quotedpricetotal" id="quotedpricetotal" placeholder="Quoted Price Total" value="<?php echo $form_data["pro_quotedpricetotal"] ?>">
         </div>
 
         <div class="col">
@@ -140,7 +140,7 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 
         <div class="col">
           <label for="retailprice">Retail Price Total</label>
-          <input type="text" onblur="calc_margin()" class="form-control" name="retailpricetotal" id="retailpricetotal" placeholder="Retail Price Total" value="<?php echo (int)$form_data["pro_retailpricetotal"] ?>">
+          <input type="text" class="form-control" name="retailpricetotal" id="retailpricetotal" placeholder="Retail Price Total" value="<?php echo (int)$form_data["pro_retailpricetotal"] ?>">
         </div>
 
         <div class="col">
@@ -256,140 +256,101 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 <p>&nbsp;</p>
 <script type="text/javascript">
 
-//form = document.getElementById('productform');
+  const elements = document.getElementById("productform").elements;
 
-//console.log(form.orderqty.value);
-
-const formObj = document.getElementById("productform").elements;
-
-var sandwiches = [
-	'tuna',
-	'ham',
-	'turkey',
-	'pb&j'
-];
-
-console.log(formObj.length);
-
-sandwiches.forEach(function (sandwich, index) {
-
-	// If the sandwich is turkey, skip it
-	if (sandwich === 'turkey') return;
-
-	// Otherwise log it to the console
-	console.log(sandwich);
-
-});
-
-// const formFields {
-//   "orderQty"         : formObj.orderqty,
-//   "retailPriceUnit"  : formObj.retailpriceunit,
-//   "retailPriceTotal" : formObj.retailpricetotal,
-//   "retailPriceUnit"  : formObj.retailpriceunit,
-//   "roughLandedCost"  : formObj.roughlandedcost,
-//   "totalPrice"       : formObj.totalprice,
-//   "qoutedPrice"      : formObj.quotedprice,
-//   "approxSellPrice"  : formObj.approxsellprice,
-//   "weightUnit"       : formObj.weightunit,
-//   "usdRate"          : formObj.usdrate
-// }
-
-//console.log(formField.orderQtyValue);
-
-class Form {
-  
-  constructor(formFields) {    
-    
-    this.populateCalcFields = function() {
-
-    }
-
-    this.calcRetailPriceTotal = function(){
-      
-    }
-
-    this.getOrderQty = function() {      
-      return this.orderQty;
-    }
-
-    this.calcTotal = function(num1, num2) {
-
-    }
-
-  }
-}
-
-//console.log(formFields.retailPriceUnit);
-
-// var inputField = this.retailPriceUnit;
-// inputField.addEventListener('blur', () => {
-//   console.log('xx');
-// });
-
-let prodForm = new Form('productform');  
-
-
-  function populate_calc_fields() {
-    calc_total_price();
-    calc_weight_total();
-    calc_margin();
-  }
-
-  function calc_retail_price_total() {   
-    let total_retail_price = form.orderqty.value * form.retailpriceunit.value;    
-    form.retailpricetotal.value = total_retail_price;
-  }
-
-  function calc_rough_landed_cost() {       
-    let rough_landed_cost = form.totalprice.value * form.usdrate.value * 1.3;    
-    form.roughlandedcost.value = parseFloat(rough_landed_cost).toFixed(2);
-  }
-
-  function calc_margin() {    
-    form.margin.value = parseFloat(form.retailpricetotal.value - form.roughlandedcost.value).toFixed(2);
-  }
-
-  function calc_profit() {
-    form.approxsellprice.value = parseFloat(form.retailpricetotal.value * (form.retailpercent.value / 100)).toFixed(2);
-    form.retailprofit.value    = parseFloat(form.retailpricetotal.value - form.approxsellprice.value).toFixed(2);
-    form.estprofit.value       = parseFloat(form.approxsellprice.value - form.roughlandedcost.value).toFixed(2);
+  function addEventListenerAndSetTargetValue(event, elmTarget, sumValue) {    
+    console.log(sumValue);
+    elmTarget.addEventListener(event, () => {      
+      elmTarget.value = sumValue; 
+    });
   }
 
   function calc_total_price() {        
-    let total_price = parseFloat(form.orderqty.value * form.quotedprice.value).toFixed(2);    
-    form.totalprice.value = total_price;
+    let total_price = parseFloat(elements.orderqty.value * elements.quotedpriceunit.value).toFixed(2);    
+    elements.quotedpricetotal.value = total_price;
   }
 
-  function calc_weight_total() {            
-    let total_weight = parseFloat(form.orderqty.value * form.weightunit.value);    
+  for(let i = 0; i < elements.length; i++) {
+
+    let sum = 0;
+
+    switch(elements[i].name) {
+
+      case "quotedpricetotal" :
+        sumValue = parseFloat(elements.orderqty.value * elements.quotedpriceunit.value).toFixed(2);
+        addEventListenerAndSetTargetValue('focus',elements[elements[i].name], sumValue);
+        break;
+
+      case "roughlandedcost" :
+        sum = parseFloat(elements.quotedpricetotal.value * elements.usdrate.value * 1.3).toFixed(2);
+        addEventListenerAndSetTargetValue('focus',elements[elements[i].name], sum);
+        break;
+
+      case "retailpricetotal" :
+        sum = elements.orderqty.value * elements.retailpriceunit.value;
+        addEventListenerAndSetTargetValue('focus',elements[elements[i].name], sum);
+        break;
+
+    }
+
+  }                                         
+
+  // function populate_calc_fields() {
+  //   calc_total_price();
+  //   calc_weight_total();
+  //   calc_margin();
+  // }
+
+  // function calc_retail_price_total() {   
+  //   let total_retail_price = form.orderqty.value * form.retailpriceunit.value;    
+  //   form.retailpricetotal.value = total_retail_price;
+  // }
+
+  // function calc_rough_landed_cost() {       
+  //   let rough_landed_cost = form.totalprice.value * form.usdrate.value * 1.3;    
+  //   form.roughlandedcost.value = parseFloat(rough_landed_cost).toFixed(2);
+  // }
+
+  // function calc_margin() {    
+  //   form.margin.value = parseFloat(form.retailpricetotal.value - form.roughlandedcost.value).toFixed(2);
+  // }
+
+  // function calc_profit() {
+  //   form.approxsellprice.value = parseFloat(form.retailpricetotal.value * (form.retailpercent.value / 100)).toFixed(2);
+  //   form.retailprofit.value    = parseFloat(form.retailpricetotal.value - form.approxsellprice.value).toFixed(2);
+  //   form.estprofit.value       = parseFloat(form.approxsellprice.value - form.roughlandedcost.value).toFixed(2);
+  // }
+
+  // function calc_weight_total() {            
+  //   let total_weight = parseFloat(form.orderqty.value * form.weightunit.value);    
     
-    form.weighttotal.value = total_weight;
-  }
+  //   form.weighttotal.value = total_weight;
+  // }
 
-  function calc_cmb_unit() {
-    var form = document.getElementById("product");
-    // convert to mm's for calculation
-    var width  = form.width.value * 10;
-    var depth  = form.depth.value * 10;
-    var height = form.height.value * 10
+  // function calc_cmb_unit() {
+  //   var form = document.getElementById("product");
+  //   // convert to mm's for calculation
+  //   var width  = form.width.value * 10;
+  //   var depth  = form.depth.value * 10;
+  //   var height = form.height.value * 10
 
-    var num_total      = width * depth * height / 1000000000;
-    var decimal_places = Math.pow(10, 2)
-    var unit_calc = Math.ceil(num_total * decimal_places) / decimal_places;
+  //   var num_total      = width * depth * height / 1000000000;
+  //   var decimal_places = Math.pow(10, 2)
+  //   var unit_calc = Math.ceil(num_total * decimal_places) / decimal_places;
 
-    form.cmunit.value = unit_calc; 
+  //   form.cmunit.value = unit_calc; 
 
-    calc_num_units_per_container(unit_calc);
-  }
+  //   calc_num_units_per_container(unit_calc);
+  // }
   
-  function calc_num_units_per_container(cm_unit) {
-    var container20ft = Math.round(27 / cm_unit);  
-    var container40ft = Math.round(55 / cm_unit);
-    var form = document.getElementById("product");
+  // function calc_num_units_per_container(cm_unit) {
+  //   var container20ft = Math.round(27 / cm_unit);  
+  //   var container40ft = Math.round(55 / cm_unit);
+  //   var form = document.getElementById("product");
 
-    form.units20.value = container20ft;
-    form.units40.value = container40ft;
-  }
+  //   form.units20.value = container20ft;
+  //   form.units40.value = container40ft;
+  // }
 
 </script>
 <?php

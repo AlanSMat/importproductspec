@@ -9,10 +9,7 @@ $dbs = new DB_SELECT("select
                             com_company.com_companyname,
                             pro_product.pro_id,
                             pro_product.pro_productname,
-                            pro_product.pro_modelno,
-                            pro_product.pro_moq, 
-                            pro_product.pro_orderqty, 
-                            pro_product.pro_quotedprice,
+                            pro_product.pro_modelno,                                                                                    
                             pro_product.pro_alibabaurl
                       from pro_product
                       inner join com_company
