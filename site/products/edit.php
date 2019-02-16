@@ -135,7 +135,7 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
       <div class="form-row">
         <div class="col">
           <label for="retailprice">Retail Price Unit</label>
-          <input type="text" class="form-control" onblur="calc_retail_price_total()" name="retailpriceunit" id="retailpriceunit" placeholder="Retail Price Unit" value="<?php echo (int)$form_data["pro_retailpriceunit"] ?>">
+          <input type="text" class="form-control" name="retailpriceunit" id="retailpriceunit" placeholder="Retail Price Unit" value="<?php echo (int)$form_data["pro_retailpriceunit"] ?>">
         </div>
 
         <div class="col">
@@ -260,45 +260,52 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 
 //console.log(form.orderqty.value);
 
-const formObj = document.getElementById("productform");
+const formObj = document.getElementById("productform").elements;
 
-let formField = {
-  "orderQtyValue" : formObj.orderqty.value,
-  "retailPriceUnitValue" : this.formObj.retailpriceunit.value;
-    this.retailPriceTotalValue = this.formObj.retailpricetotal.value;
-    this.retailPriceUnitValue = this.formObj.retailpriceunit.value;
-    this.roughLandedCostValue = this.formObj.roughlandedcost.value;
-    this.totalPriceValue = this.formObj.totalprice.value;
-    this.qoutedPriceValue = this.formObj.quotedprice.value;
-    this.approxSellPriceValue = this.formObj.approxsellprice.value;
-    this.weightUnitValue = this.formObj.weightunit.value
-    this.usdRateValue = this.formObj.usdrate.value;
-}
+var sandwiches = [
+	'tuna',
+	'ham',
+	'turkey',
+	'pb&j'
+];
+
+console.log(formObj.length);
+
+sandwiches.forEach(function (sandwich, index) {
+
+	// If the sandwich is turkey, skip it
+	if (sandwich === 'turkey') return;
+
+	// Otherwise log it to the console
+	console.log(sandwich);
+
+});
+
+// const formFields {
+//   "orderQty"         : formObj.orderqty,
+//   "retailPriceUnit"  : formObj.retailpriceunit,
+//   "retailPriceTotal" : formObj.retailpricetotal,
+//   "retailPriceUnit"  : formObj.retailpriceunit,
+//   "roughLandedCost"  : formObj.roughlandedcost,
+//   "totalPrice"       : formObj.totalprice,
+//   "qoutedPrice"      : formObj.quotedprice,
+//   "approxSellPrice"  : formObj.approxsellprice,
+//   "weightUnit"       : formObj.weightunit,
+//   "usdRate"          : formObj.usdrate
+// }
 
 //console.log(formField.orderQtyValue);
 
 class Form {
   
-  constructor(formId) {
-    /*this.formObj = document.getElementById(formId);
-    this.orderQtyValue = this.formObj.orderqty.value;
-    this.retailPriceUnitValue = this.formObj.retailpriceunit.value;
-    this.retailPriceTotalValue = this.formObj.retailpricetotal.value;
-    this.retailPriceUnitValue = this.formObj.retailpriceunit.value;
-    this.roughLandedCostValue = this.formObj.roughlandedcost.value;
-    this.totalPriceValue = this.formObj.totalprice.value;
-    this.qoutedPriceValue = this.formObj.quotedprice.value;
-    this.approxSellPriceValue = this.formObj.approxsellprice.value;
-    this.weightUnitValue = this.formObj.weightunit.value
-    this.usdRateValue = this.formObj.usdrate.value;*/
+  constructor(formFields) {    
     
     this.populateCalcFields = function() {
 
     }
 
     this.calcRetailPriceTotal = function(){
-      let totalRetailPrice = this.orderQtyValue * this.retailPriceUnit;
-      return totalRetailPrice;
+      
     }
 
     this.getOrderQty = function() {      
@@ -311,6 +318,13 @@ class Form {
 
   }
 }
+
+//console.log(formFields.retailPriceUnit);
+
+// var inputField = this.retailPriceUnit;
+// inputField.addEventListener('blur', () => {
+//   console.log('xx');
+// });
 
 let prodForm = new Form('productform');  
 
