@@ -40,7 +40,7 @@ $dbs = new DB_SELECT("select
               <td><?php echo $field_value["pro_productname"] ?></td>
               <td><?php echo $field_value["com_companyname"] ?></td>              
               <td width="150">
-                <span><a href="view.php?id=<?php echo $field_value["pro_id"] ?>">View</button></span>
+                <span><a href="view.php?id=<?php echo $field_value["pro_id"] ?>&view=1">View</button></span>
                 <span><a href="edit.php?id=<?php echo $field_value["pro_id"] ?>">Edit</button></span>
                 <span><a href="process.php?del=<?php echo $field_value["pro_id"] ?>">Delete</button></span>
               </td>

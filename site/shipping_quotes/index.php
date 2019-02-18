@@ -6,8 +6,7 @@ include("../../globals.php");
 include(SITE_HEADER);
 
 $dbs = new DB_SELECT("SELECT
-                        shq_shippingquote.shq_id AS quoteid,
-                        shq_shippingquote.shq_contact AS shipping_contact,
+                        shq_shippingquote.shq_id AS quoteid,                        
                         pro_product.pro_productname AS product_name,
                         shc_shippingcompany.shc_shcompanyname AS shipping_company
                         FROM pro_product

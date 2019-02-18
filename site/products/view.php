@@ -95,13 +95,13 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
         </div>      
           
         <div class="col">
-          <label for=" ">Quoted price</label>
-          <input type="text" class="form-control" disabled onblur="calc_total_price()" name="quotedprice" id="quotedprice" placeholder="Quoted Price" value="$<?php echo $form_data["pro_quotedprice"] ?>">
+          <label for=" ">Quoted Price Unit</label>
+          <input type="text" class="form-control" disabled onblur="calc_total_price()" name="quotedpriceunit" id="quotedpriceunit" placeholder="Quoted Price Unit" value="$<?php echo $form_data["pro_quotedpriceunit"] ?>">
         </div>      
         
         <div class="col">
-          <label for="totalprice">Total Price</label>
-          <input type="text" class="form-control" disabled name="totalprice" id="totalprice" placeholder="Total Price" value="$<?php echo $form_data["pro_totalprice"] ?>">
+          <label for="quotedpricetotal">Quoted Price Total</label>
+          <input type="text" class="form-control" disabled name="quotedpricetotal" id="quotedpricetotal" placeholder="Quoted Price Total" value="$<?php echo $form_data["pro_quotedpricetotal"] ?>">
         </div>
 
         <div class="col">

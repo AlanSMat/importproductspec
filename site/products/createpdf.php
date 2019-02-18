@@ -17,7 +17,8 @@ $dbs = new DB_SELECT("SELECT shc_shcompanyname,
                              shc_shemail          
                       FROM shc_shippingcompany 
                       WHERE shc_id=" . $_POST["shcompanyid"] . "");
-$shc_data = $dbs->get_form_data("shc_shippingcompany");
+
+$shc_data = $dbs->result()[0];
 
 $html .= "Quote ID: " . substr(strtoupper($shc_data["shc_shcompanyname"]), 0, 3) . $quote_id;
 $html .= "</div >";
@@ -43,7 +44,7 @@ $html .= "<td class=\"leftCell\">From Port:</td>";
 $dbs = new DB_SELECT("SELECT * 
                       FROM com_company 
                       WHERE com_id=" . $_POST["companyid"] . "");
-$shc_data = $dbs->get_form_data("com_company");
+$shc_data = $dbs->result()[0];
 
 $html .= "<td>" . $shc_data["com_port"] . "</td>";
 $html .= "</tr>";
@@ -65,7 +66,7 @@ $html .= "<td>" . $_POST["orderqty"] . "</td>";
 $html .= "</tr>";
 $html .= "<tr>";
 $html .= "<td class=\"leftCell\">Value of Goods (total):</td>";
-$html .= "<td>$" . $_POST["totalprice"] . " USD</td>";
+$html .= "<td>$" . $_POST["quotedpricetotal"] . " USD</td>";
 $html .= "</tr>";
 $html .= "<tr>";
 $html .= "<td class=\"leftCell\">Type of freight:</td>";

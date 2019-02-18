@@ -248,8 +248,14 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
         </div>
       </div>
     </div>      
+    <?php
+    if (!isset($_REQUEST["view"])) {
+      ?>   
     <button type="submit" name="submit" class="btn btn btn-primary">Save Product</button>
     <button type="submit" name="generate_shipping_quote" class="btn btn btn-primary">Generate Shipping Quote</button>    
+    <?php 
+  }
+  ?>
   </form>
 
 </div>
@@ -317,6 +323,22 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
     form.units20.value = container20ft;
     form.units40.value = container40ft;
   }
+
+  function set_disabled() {
+    
+    for(var i = 0; i < form.elements.length; i++) {      
+      form.elements[i].disabled = true;
+    }
+
+  }
+  <?php
+  if (isset($_REQUEST["view"])) {
+    ?>    
+    set_disabled();
+  <?php
+
+}
+?>
 
 </script>
 <?php
