@@ -64,10 +64,15 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
         </div>
       </div>
 
-      <div class="form-row">      
+      <div class="form-row">
         <div class="col">
-          <label for="address">Model No</label>
-          <input type="text" class="form-control" name="modelno" id="address" placeholder="Model No" value="<?php echo $form_data["pro_modelno"] ?>">
+          <label for="modelno">Model No</label>
+          <input type="text" class="form-control" name="modelno" id="modelno" placeholder="Model No" value="<?php echo $form_data["pro_modelno"] ?>">
+        </div>
+        
+        <div class="col">
+          <label for="hscode">HS Code</label>
+          <input type="text" class="form-control" name="hscode" id="hscode" placeholder="HS Code" value="<?php echo $form_data["pro_hscode"] ?>">
         </div>
 
         <div class="col">

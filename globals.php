@@ -5,10 +5,25 @@ if ($_SERVER["SERVER_NAME"] == 'localhost') {
     define("LOCAL_DIR", "asm/importproductspec");
     define("DOC_ROOT", $_SERVER['DOCUMENT_ROOT'] . "/" . LOCAL_DIR);
     define("ROOT_URL", "http://" . $_SERVER["SERVER_NAME"] . "/" . LOCAL_DIR);
+
+    define("DB_SERVER_NAME", $_SERVER["SERVER_NAME"]);
+    define("DB_NAME", "importproductspec");
+    define("DB_USERNAME", "astev");
+    define("DB_PASSWORD", "imV4lid!");
 } else {
     define("DOC_ROOT", $_SERVER['DOCUMENT_ROOT']);
     define("ROOT_URL", "http://" . $_SERVER["SERVER_NAME"]);
+
+    define("DB_SERVER_NAME", $_SERVER["SERVER_NAME"]);
+    define("DB_NAME", "fcz7gjcr_importproductspec");
+    define("DB_USERNAME", "fcz7gjcr_astev");
+    define("DB_PASSWORD", "imV4lid!");
 }
+
+$db_conn_vars["db_server_name"] = DB_SERVER_NAME;
+$db_conn_vars["db_name"] = DB_NAME;
+$db_conn_vars["db_username"] = DB_USERNAME;
+$db_conn_vars["db_password"] = DB_PASSWORD;
 
 define("MAIN_TITLE", "");
 define("COMPANY", "");
@@ -43,16 +58,5 @@ define("SITE_URL", ROOT_URL . "/site");
 include(UTILS_COMMON);
 
 //db stuff
-include(CLASSES_PATH . "/class.db.php");
-
-
-define("DB_SERVER_NAME", $_SERVER["SERVER_NAME"]);
-define("DB_NAME", "importproductspec");
-define("DB_USERNAME", "astev");
-define("DB_PASSWORD", "imV4lid!");
-
-$db_conn_vars["db_server_name"] = DB_SERVER_NAME;
-$db_conn_vars["db_name"] = DB_NAME;
-$db_conn_vars["db_username"] = DB_USERNAME;
-$db_conn_vars["db_password"] = DB_PASSWORD;
+include(CLASSES_PATH . "/class.DB.php");
 ?>

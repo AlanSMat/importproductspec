@@ -1,5 +1,8 @@
 <?php 
 include("globals.php");
+
+
+
 include(CLASSES_PATH . "/class.Test.php");
 ?>
 <html>
