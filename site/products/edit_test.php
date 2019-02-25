@@ -293,13 +293,19 @@ isset($_REQUEST["companyid"]) ? $form_data["pro_companyid"] = $_REQUEST["company
 <p>&nbsp;</p>
 <script src="<?php echo SCRIPTS_URL ?>/productsformcalc.js"></script>
 <script type="text/javascript">
-//const bob = new Person();
+// const bob = new Person();
 
-//bob.name = 'Steve';
+// bob.name = 'Steve';
+// bob.x = 'test';
+// bob.walk();
 
-//console.log(bob.name); // Outputs 'BOB'
+// console.log(bob.x); // Outputs 'BOB'
 
-const pfc = new ProductFormCalc('productform', 'x');
+const pfc = new ProductFormCalc('productform');
+
+pfc.elmId = 'aa';
+
+console.log(pfc.elmId);
 
 const calc = () => {
   return (parseFloat(pfc.formElms.orderqty.value * pfc.formElms.quotedpriceunit.value).toFixed(2))

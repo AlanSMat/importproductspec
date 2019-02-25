@@ -2,14 +2,33 @@ class ProductFormCalc {
 	constructor(formId) {
 		this.formId = formId;
 		this._formElms = document.getElementById(formId).elements;
+		this._elmId = 'xx';
 	}
 
-	get formElms() {
-		return this._formElms;
+	get elmId() {
+		return this._elmId;
 	}
 
-	set formElms(formElms) {
-		this._formElms = formElms;
+	set elmId(formElms) {
+		this._elmId = formElms;
+	}
+
+	set elmByIdValue(elmId) {
+		this._elmId;
+		//this._formElms.getElementById(this._elmId).value;
+	}
+
+	get elmByIdValue() {
+		return this._elmId;
+		//return this._formElms.getElementById(this._elmId).value;
+	}
+
+	get x() {
+		return this._x;
+	}
+
+	set x(id) {
+		this._x = id;
 	}
 
 	addEventListenerAndSetTargetValue(event, elmTarget, callback) {
@@ -25,6 +44,7 @@ class ProductFormCalc {
 class Person {
 	constructor(name) {
 		this._name = name;
+		this._x = 'a';
 	}
 
 	get name() {
@@ -35,7 +55,15 @@ class Person {
 		this._name = newName; // validation could be checked here such as only allowing non numerical values
 	}
 
+	get x() {
+		return this._x.toUpperCase();
+	}
+
+	set x(newName) {
+		this._x = newName; // validation could be checked here such as only allowing non numerical values
+	}
+
 	walk() {
-		console.log(this._name + ' is walking.');
+		console.log(this._x + ' is walking.');
 	}
 }
